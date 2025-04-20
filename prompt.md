@@ -7,7 +7,7 @@
 Amkadamiyya School Jalingo has been managing student fees the old-fashioned way: **spreadsheets**. Excel files scattered across desks, shared via email, updated manually, prone to errors. Here's the painful reality:
 
 - **Lost data**: Rows deleted by accident, versions overwritten, no audit trail
-- **Manual calculations**: Balancing sheets takes hours, arithmetic mistakes = angry parents
+- **Manual calculations**: Balancing sheets takes hours, arithmetic mistakes = angry parent
 - **No visibility**: Finance staff doesn't know who owes what until end-of-term reconciliation (too late)
 - **Payment chaos**: Multiple payment methods (cash, bank transfers, mobile money) logged separately, hard to reconcile
 - **Paper receipts**: Printed receipts get lost; parents call asking "did you record my payment?"
