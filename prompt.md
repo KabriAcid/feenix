@@ -1,4 +1,3 @@
-NOTE: FOCUS ON CREATING ONLY THE PAGES USING OUR CUSTOM UI, NO DB INTEGRATION OR UNNECESSARY DEVDEPENCIES OR INSTALLATIONS
 # 🎯 AI Builder Prompt: Feenix: Amkadamiyya School Fee Management System
 
 ## 📖 The Problem & Solution
@@ -11,7 +10,7 @@ NOTE: FOCUS ON CREATING ONLY THE PAGES USING OUR CUSTOM UI, NO DB INTEGRATION OR
 
 ## Project Overview
 
-Build a **production-ready React frontend** for a school fee management system that replaces Excel spreadsheets with a modern, intuitive web interface. This is for Amkadamiyya School Jalingo. Generate **ONLY React pages and reusable components**—no backend code, no database integration, no Radix UI, no shadcn.
+Build a **production-ready React (Typescript) frontend** for a school fee management system that replaces Excel spreadsheets with a modern, intuitive web interface. This is for Amkadamiyya School Jalingo. Generate **ONLY React pages and reusable components**—no backend code, no database integration, use Radix UI.
 
 ---
 
@@ -59,6 +58,7 @@ All UI components, utilities, and charts should reference these variables direct
 - Smooth Framer Motion animations throughout
 - Tables for dense data (Students table, debtors summary); prefer card grids elsewhere
 - Skeleton loaders for all data-loading states (perceived performance)
+- Use gradient blurry blobs for the backgrounds using our design system.
 
 ---
 
@@ -66,7 +66,7 @@ All UI components, utilities, and charts should reference these variables direct
 
 **Required**:
 
-- React Router v6
+- React Router + Typescript
 - Tailwind CSS (custom config with above palette)
 - **Heroicons** (all icons)
 - **Framer Motion** (all animations)
@@ -97,23 +97,6 @@ All UI components, utilities, and charts should reference these variables direct
 **Role-based UI**: Hide restricted features for non-admins.
 
 ---
-
-## 📁 Project Structure
-
-```
-src/
-├── components/
-│   ├── ui/                  # Button, Card, Input, Select, Modal, Toast, Loader, SearchBar, Badge, Avatar, Skeleton, Table
-│   ├── layout/              # Sidebar, Topbar, BottomNav, NavigationGrid, PageHeader
-│   ├── dashboard/           # MetricCard, ProgressBar, Charts, ActivityFeed
-│   ├── students/            # StudentList, Filters, AddModal, BulkUploadModal, Tabs
-│   ├── payments/            # PaymentForm, Receipt
-│   └── fees/                # FeeStructureCard, TemplateForm
-├── pages/                   # Dashboard, Students, StudentDetails, RecordPayment, FeeStructure, Debtors, Reports, Settings, NavigationPage
-├── hooks/                   # useAuth, useStudents, usePayments
-├── utils/                   # formatCurrency, formatDate, calculateBalance
-└── context/                 # AuthContext, AppContext
-```
 
 ---
 
@@ -268,82 +251,6 @@ src/
 
 ---
 
-## 🎨 Reusable Components (Key Props)
-
-### Button
-
-**Variants**: primary, secondary, ghost, danger, success.
-**Sizes**: small, medium, large.
-**States**: hover, active, disabled, loading.
-**Props**: icon (left/right/only), full-width.
-
-### Card
-
-**Variants**: default, highlighted, warning, danger, hoverable.
-**Props**: title, icon, action, footer.
-**Animations**: Fade + slide up, hover lift.
-
-### Input
-
-**Base**: 44px, 8px radius, left icon, brand ring.
-**Types**: text, number (₦), date, email, phone, password.
-**States**: default, focus, error (red), disabled, success.
-
-### Modal
-
-**Structure**: Backdrop (blur + fade), container (centered, sizes: small/medium/large/full), close X button, header (title + icon), scrollable body, footer (buttons right-aligned)  
-**Close Behavior**: Modal closes on backdrop click-away, ESC key, or close button.
-**Animations**: Backdrop fade, modal scale-in from 0.95, exit reverse  
-**Accessibility**: Focus trap, ESC to close, backdrop click to close, scroll lock on body
-
-### Badge
-
-**Variants**: success (brand), warning (amber), danger (red), info (blue), neutral (gray), category (nursery, primary, junior, senior using `--cat-*` vars)  
-**Sizes**: small, medium, large  
-**Props**: icon (left/right), uppercase option
-
-### SearchBar
-
-**Features**: Icon (left), input, clear X (typing), spinner.
-**Functionality**: Debounced (300ms), CMD/CTRL+K focus.
-
-### Toast
-
-**Types**: success, error, warning, info.
-**Position**: Top-right, stacked.
-**Auto-dismiss**: 5s.
-**Animations**: Slide + fade.
-
-### Loader
-
-**Variants**: spinner, dots, bar (progress), skeleton (cards, tables, charts).
-**Sizes**: small, medium, large.
-**Colors**: primary (brand), secondary (gray), category variants.
-
-### Table
-
-**Usage**: Students list, debtors summary, dense data.
-**Features**: Responsive (collapse to cards <640px), sortable, row selection, sticky header, skeleton loading.
-**Styling**: Header bg `--secondary`, hover bg `--secondary` at 30%, focus `--primary`.
-**Accessibility**: `role="table"`, `th` scope, keyboard focusable rows, tel links for phones.
-**Animations**: Fade + slide up, row hover scale 1.01.
-
-### BottomNav (Mobile)
-
-**Visibility**: SM screens (<1024px). Fixed bar: 3 primary (Dashboard, Students, Payments) + "More" button.
-**Styling**: Bg `--white`, border-top `--secondary`, 44-56px height, safe padding.
-**More**: Navigates to `/nav` (Navigation Page).
-**Accessibility**: ARIA labels, Tab navigation.
-
-### Sidebar (Desktop)
-
-**Visibility**: LG screens (≥1024px). Collapsible vertical sidebar.
-**Collapsed**: Icons (~64px), hover tooltips.
-**Expanded**: Icons + labels (~240px).
-**Active**: Left border `--primary`.
-**Animations**: Smooth collapse/expand, hover lift.
-
----
 
 ## 🎬 Animation Strategy
 
@@ -361,16 +268,6 @@ src/
 - Chart data updates
 - Toast notifications (slide + fade)
 
-**General principles**:
-
-- Spring physics for natural feel
-- 0.3s duration
-- Stagger children 0.05s delay
-- Hover: lift + scale (1.02)
-- Tap: scale (0.98)
-
----
-
 ## 📱 Responsive Design
 
 **Breakpoints**: Mobile (<640px), Tablet (640-1024px), Desktop (>1024px)
@@ -380,23 +277,11 @@ src/
 - **SM screens (<1024px)**: Bottom navigation bar with 3 primary items (Dashboard, Students, Payments) + 1 "More" button. "More" navigates to dedicated mobile-only Navigation Page (`/nav`) with grid layout showing all remaining routes (Debtors, Fee Structure, Reports, Settings, etc.) with icons, labels, and category color accents. Bottom nav remains visible on this page for quick return.
 - **LG screens (≥1024px)**: Premium sidebar (collapsible, shows icons + labels when expanded) with all navigation items, persistent across pages. Topbar for global actions and user profile.
 
-**Key adaptations**:
-
-- Metric cards: 1-col mobile, 2-col tablet, 4-col desktop
-- Student grid: 1-col mobile, 2-col tablet, 3-col desktop
-- Forms: Single-col mobile, multi-col desktop
-- Tables: Card layout mobile, table desktop
-- Modals: Full-screen mobile, centered tablet/desktop
-
-**Touch-friendly**: 44px minimum tap targets, 64px navigation items on mobile
-
----
 
 ## 🔒 Security & Validation
 
 **Form validation**: Real-time blur validation, errors below inputs.
 **Validators**: Required fields, email, phone, date ranges, unique admission numbers, amounts.
-**Role-based rendering**: Hide features based on user role.
 **Confirmations**: Destructive actions, large payments, bulk ops, type-to-confirm for critical actions.
 **Phone Links**: All phone numbers as `href="tel:"` with ARIA labels.
 
@@ -425,10 +310,10 @@ src/
 - Smooth Framer Motion animations
 - Heroicons only
 - Clean reusable components
-- TypeScript optional
+- TypeScript
 - Tailwind with custom palette
 - Mock API ready (Axios)
 - Comments for complex logic
 - Accessible (ARIA, keyboard nav, focus mgmt)
 
-**Build an intuitive interface that makes fee management effortless.**
+**Build an premium, production-ready, super intuitive interface that makes fee management effortless.**
